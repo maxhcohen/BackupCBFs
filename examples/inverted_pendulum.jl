@@ -3,12 +3,12 @@ using LinearAlgebra
 using BackupCBFs
 using Plots
 
-# Dynamics
+# Dynamics: inverted pendulum
 f(x) = [x[2], sin(x[1])]
 g(x) = [0.0, 1.0]
 Σ = ControlAffineSystem(2, 1, f, g)
 
-# Safety constraint
+# Safety constraint: limit position and velocity of pendulum
 θmax = 0.5
 θ̇max = 1.0
 hs(x) = min(θmax^2 - x[1]^2, θ̇max^2 - x[2]^2)
@@ -49,16 +49,6 @@ kQP = ImplicitCBFQP(h, kd, -umax, umax)
 
 # Closed-loop dynamics
 fcl(x) = f(x) + g(x)*kQP(x)
-
-# Function for visualizing closed-loop response
-function plot_vector_field!(xs, ys, f::Function, scale; kwargs...)
-    X = [x for x in xs for y in ys]
-    Y = [y for x in xs for y in ys]
-    Xs = [[x,y] for (x,y) in zip(X,Y)]
-    f1 = [scale*normalize(f(x))[1] for x in Xs]
-    f2 = [scale*normalize(f(x))[2] for x in Xs]
-    quiver!(X, Y, quiver=(f1, f2); kwargs...)
-end
 
 # Plot vector field
 plot_vector_field!(range(-0.6, 0.6, 15), range(-1.5, 1.5, 15), fcl, 0.05; lw=1, c=2)
