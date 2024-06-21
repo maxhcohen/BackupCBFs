@@ -2,7 +2,6 @@ using Revise
 using LinearAlgebra
 using BackupCBFs
 using Plots
-using BenchmarkTools
 
 # Dynamics
 f(x) = [x[2], sin(x[1])]
