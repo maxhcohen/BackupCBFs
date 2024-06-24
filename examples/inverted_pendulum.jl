@@ -27,8 +27,9 @@ hb(x) = c - V(x)
 
 # Plot constraint set and backup set
 begin
-    fig = contour(range(-0.6, 0.6, 100), range(-1.5, 1.5, 150), (x,y) -> hb([x,y]), levels=[0.0], c=4, colorbar=false, lw=4)
-    vline!([-θmax, θmax], c=:black)
+    fig = myplot()
+    contour!(range(-0.6, 0.6, 100), range(-1.5, 1.5, 150), (x,y) -> hb([x,y]), levels=[0.0], c=4, colorbar=false, lw=4)
+    vline!([-θmax, θmax], c=:black, label="", lw=2)
     xlabel!(raw"$\theta$")
     ylabel!(raw"$\dot{\theta}$")
 end
