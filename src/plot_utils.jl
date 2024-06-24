@@ -41,3 +41,10 @@ function plot_vector_field!(xs, ys, f::Function, scale::Float64; kwargs...)
     f2 = [scale*normalize(f(x))[2] for x in Xs]
     quiver!(X, Y, quiver=(f1, f2); kwargs...)
 end
+
+"""
+    myplot()
+
+Make a new plot with some attributes that I like.
+"""
+myplot() = plot(grid=false, framestyle=:box, palette=:tab10, fontfamily="Computer Modern", guidefontsize=14, tickfontsize=10)

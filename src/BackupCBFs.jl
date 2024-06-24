@@ -18,6 +18,7 @@ export ImplicitCBFQP
 export ImplicitRegulationFilter
 export plot_vector_field
 export plot_vector_field!
+export myplot
 
 # Include source code
 include("systems.jl")
